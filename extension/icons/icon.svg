@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <!-- full-bleed cute camera: no background tile, body fills the canvas -->
+  <!-- viewfinder bump -->
+  <rect x="38" y="10" width="52" height="30" rx="12" fill="#E86A2F"/>
+  <!-- camera body -->
+  <rect x="2" y="26" width="124" height="92" rx="22" fill="#E86A2F"/>
+  <!-- flash dot -->
+  <circle cx="22" cy="46" r="7" fill="#FFF4E8"/>
+  <!-- lens -->
+  <circle cx="64" cy="72" r="32" fill="#FFF4E8"/>
+  <circle cx="64" cy="72" r="20" fill="#5B3319"/>
+  <circle cx="72" cy="64" r="7" fill="#FFFFFF" opacity="0.95"/>
+</svg>

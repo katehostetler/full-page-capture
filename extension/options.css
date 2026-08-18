@@ -1,0 +1,103 @@
+body {
+  margin: 0;
+  padding: 20px 24px 24px;
+  min-width: 340px;
+  background: #fff9f3;
+  color: #2b1d12;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 14px;
+}
+
+h1 {
+  margin: 0 0 14px;
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8a6a4c;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 6px 0;
+  cursor: pointer;
+}
+
+input {
+  accent-color: #e86a2f;
+  width: 15px;
+  height: 15px;
+  margin: 0;
+}
+
+input:focus-visible {
+  outline: 2px solid #e86a2f;
+  outline-offset: 2px;
+}
+
+fieldset {
+  margin: 14px 0 0;
+  padding: 4px 14px 10px;
+  border: 1px solid #f0dcc4;
+  border-radius: 10px;
+}
+
+legend {
+  padding: 0 6px;
+  font-weight: 600;
+}
+
+.hint {
+  margin: 8px 0 2px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #8a6a4c;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 6px 0 2px;
+}
+
+.stack span {
+  font-size: 12.5px;
+}
+
+input[type="text"] {
+  width: 100%;
+  height: auto;
+  font: 13px ui-monospace, "SF Mono", Menlo, monospace;
+  padding: 7px 10px;
+  border: 1px solid #f0dcc4;
+  border-radius: 8px;
+  background: #fff;
+  color: #2b1d12;
+}
+
+input[type="text"]:focus-visible {
+  outline: 2px solid #e86a2f;
+  outline-offset: 1px;
+}
+
+.notice {
+  margin: 12px 0 0;
+  padding: 9px 12px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #2b1d12;
+  background: #fbeee2;
+  border: 1px solid #e86a2f;
+  border-radius: 8px;
+}
+
+#saved {
+  margin: 10px 0 0;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #e86a2f;
+}

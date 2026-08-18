@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Full Page Capture — Settings</title>
+    <link rel="stylesheet" href="options.css" />
+  </head>
+  <body>
+    <h1>Settings</h1>
+
+    <label class="row">
+      <input type="checkbox" id="openPreview" />
+      <span>Open a preview tab after each capture</span>
+    </label>
+
+    <fieldset>
+      <legend>Automatically download</legend>
+      <label class="row"><input type="checkbox" name="format" value="png" /> <span>PNG</span></label>
+      <label class="row"><input type="checkbox" name="format" value="jpg" /> <span>JPG</span></label>
+      <label class="row"><input type="checkbox" name="format" value="pdf" /> <span>PDF</span></label>
+      <p class="hint">Pick any combination — or none, and choose in the preview tab instead.</p>
+    </fieldset>
+
+    <fieldset>
+      <legend>Save location</legend>
+      <label class="stack">
+        <span>Subfolder inside Downloads</span>
+        <input type="text" id="saveFolder" placeholder="e.g. Screenshots/full-page" spellcheck="false" />
+      </label>
+      <p class="hint">
+        Leave blank to save straight to Downloads. Chrome only lets extensions
+        save inside the Downloads folder.
+      </p>
+    </fieldset>
+
+    <p id="notice" class="notice" hidden>
+      Preview turned back on — with no auto-download formats selected, there
+      would be no way to get your screenshot.
+    </p>
+
+    <p id="saved" hidden>Saved ✓</p>
+
+    <script type="module" src="options.js"></script>
+  </body>
+</html>
