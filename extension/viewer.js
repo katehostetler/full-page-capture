@@ -1,11 +1,13 @@
 import { buildFilename } from "./lib/plan.js";
 import { applySaveFolder } from "./lib/settings.js";
 import { stitchFrames, canvasesToImageBlobs, canvasesToPdfBlob } from "./lib/stitch.js";
+import { fitScale, zoomScrollTop, visibleCenterFraction } from "./lib/zoom.js";
 
 const captureId = new URLSearchParams(location.search).get("capture");
 const statusEl = document.getElementById("status");
 const errorEl = document.getElementById("error");
 const previewEl = document.getElementById("preview");
+const zoomBtn = document.getElementById("zoom-toggle");
 const pngBtn = document.getElementById("download-png");
 const jpgBtn = document.getElementById("download-jpg");
 const pdfBtn = document.getElementById("download-pdf");
@@ -45,7 +47,9 @@ async function maybeRender() {
     const width = canvases[0].width;
     const height = canvases.reduce((sum, c) => sum + c.height, 0);
     statusEl.textContent = `${width}×${height}px`;
-    for (const btn of [pngBtn, jpgBtn, pdfBtn]) btn.disabled = false;
+    imageSize = { width, height };
+    applyZoomState();
+    for (const btn of [zoomBtn, pngBtn, jpgBtn, pdfBtn]) btn.disabled = false;
 
     for (const format of settings.autoFormats) {
       if (format === "png") downloadImage("image/png", "png");
@@ -85,6 +89,71 @@ async function downloadPdf() {
     saveAs: false,
   });
 }
+
+// --- Fit/zoom toggle ---------------------------------------------------
+// The page opens zoomed out (whole capture scaled to fit the window).
+// Clicking the image zooms in centered on the clicked spot; clicking again —
+// or the toolbar magnifier — zooms back out. Canvases keep their full
+// resolution; only the CSS width of #preview changes.
+let imageSize = null;
+let zoomed = false;
+
+const previewTop = () => previewEl.getBoundingClientRect().top + window.scrollY;
+
+function applyZoomState() {
+  if (!imageSize) return;
+  document.body.classList.toggle("zoomed", zoomed);
+  previewEl.classList.toggle("zoomed", zoomed);
+  previewEl.classList.toggle("fit", !zoomed);
+  zoomBtn.setAttribute("aria-label", zoomed ? "Zoom out" : "Zoom in");
+  zoomBtn.title = zoomed ? "Zoom out" : "Zoom in";
+  if (zoomed) {
+    previewEl.style.width = "";
+    return;
+  }
+  const headerHeight = document.querySelector("header").offsetHeight;
+  const gaps = (canvases.length - 1) * 4;
+  const availWidth = previewEl.parentElement.clientWidth - 48;
+  const availHeight = window.innerHeight - headerHeight - 48 - gaps;
+  const scale = fitScale(imageSize.width, imageSize.height, availWidth, availHeight);
+  previewEl.style.width = `${Math.max(1, Math.floor(imageSize.width * scale))}px`;
+}
+
+// fraction = which part of the image (0 top .. 1 bottom) to center afterwards.
+function setZoomed(next, fraction) {
+  zoomed = next;
+  applyZoomState();
+  if (zoomed) {
+    window.scrollTo(0, zoomScrollTop(fraction, previewEl.offsetHeight, previewTop(), window.innerHeight));
+  } else {
+    window.scrollTo(0, 0);
+  }
+}
+
+previewEl.addEventListener("click", (event) => {
+  if (!imageSize) return;
+  if (zoomed) {
+    setZoomed(false);
+  } else {
+    const rect = previewEl.getBoundingClientRect();
+    setZoomed(true, (event.clientY - rect.top) / rect.height);
+  }
+});
+
+zoomBtn.addEventListener("click", () => {
+  if (!imageSize) return;
+  const fraction = visibleCenterFraction(
+    window.scrollY,
+    window.innerHeight,
+    previewTop(),
+    previewEl.offsetHeight
+  );
+  setZoomed(!zoomed, fraction);
+});
+
+window.addEventListener("resize", () => {
+  if (!zoomed) applyZoomState();
+});
 
 pngBtn.addEventListener("click", () => downloadImage("image/png", "png"));
 jpgBtn.addEventListener("click", () => downloadImage("image/jpeg", "jpg"));

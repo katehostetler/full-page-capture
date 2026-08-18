@@ -84,6 +84,16 @@ header {
   outline-offset: 2px;
 }
 
+.btn.icon {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px;
+}
+
+body.zoomed .plus-v {
+  display: none;
+}
+
 main {
   max-width: 960px;
   margin: 32px auto 64px;
@@ -100,6 +110,21 @@ main {
 
 #preview canvas + canvas {
   margin-top: 16px;
+}
+
+/* Zoomed-out overview: preview gets an explicit pixel width from viewer.js
+   so the whole capture fits in the window. */
+#preview.fit {
+  margin: 0 auto;
+  cursor: zoom-in;
+}
+
+#preview.fit canvas + canvas {
+  margin-top: 4px;
+}
+
+#preview.zoomed {
+  cursor: zoom-out;
 }
 
 #error {

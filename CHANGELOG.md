@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- 2026-08-18: Preview tab now opens zoomed out so the whole capture is visible at once. Click the image (magnifying-glass cursor) to zoom in centered on that spot, click again — or use the new header magnifier button — to zoom back out.
+
 ## v0.5.0 — 2026-08-17
 
 Initial public release.

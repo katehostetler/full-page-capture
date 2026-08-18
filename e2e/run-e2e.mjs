@@ -214,6 +214,27 @@ try {
   console.log(`viewer status: ${statusText}`);
   await viewer.screenshot({ path: path.join(artifactsDir, "e2e-viewer.png") });
 
+  // Zoom: the viewer opens fitted so the whole capture is visible at once,
+  // clicking the image zooms in centered on the click, and the toolbar
+  // magnifier zooms back out.
+  const viewportH = await viewer.evaluate(() => window.innerHeight);
+  const fitBox = await viewer.locator("#preview").boundingBox();
+  console.log(`viewer fit: preview ${Math.round(fitBox.height)}px in ${viewportH}px viewport`);
+  if (fitBox.height > viewportH) fail("zoom: preview does not fit the viewport on open");
+  await viewer
+    .locator("#preview")
+    .click({ position: { x: fitBox.width / 2, y: fitBox.height / 2 } });
+  const zoomedHeight = await viewer.evaluate(
+    () => document.getElementById("preview").getBoundingClientRect().height
+  );
+  if (zoomedHeight <= viewportH) fail("zoom: clicking the preview did not zoom in");
+  const zoomScrollY = await viewer.evaluate(() => window.scrollY);
+  if (zoomScrollY <= 0) fail("zoom: did not scroll to the clicked spot");
+  await viewer.screenshot({ path: path.join(artifactsDir, "e2e-viewer-zoomed.png") });
+  await viewer.click("#zoom-toggle");
+  const refitBox = await viewer.locator("#preview").boundingBox();
+  if (refitBox.height > viewportH) fail("zoom: toolbar toggle did not zoom back out");
+
   before = await downloadCount(worker);
   await viewer.click("#download-png");
   const [pngBuf] = await waitForNewDownloads(worker, before);
