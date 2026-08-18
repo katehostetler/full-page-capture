@@ -4,8 +4,9 @@ import { chromium } from "playwright";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
-const projectRoot = "/Users/katehostetler/Projects/chrome-ext";
+const projectRoot = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const outPath = process.argv[3] || path.join(projectRoot, "e2e-artifacts", "demo-real-page.png");
 const targetUrl = process.argv[2];
 if (!targetUrl) {
