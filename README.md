@@ -1,5 +1,7 @@
 # Full Page Capture 📸
 
+[![tests](https://github.com/katehostetler/full-page-capture/actions/workflows/test.yml/badge.svg)](https://github.com/katehostetler/full-page-capture/actions/workflows/test.yml)
+
 **A local Chrome extension — just download it, add it to Chrome, and screenshot.**
 
 Captures **full-page screenshots**: it scrolls the page for you, stitches every screen into one image, and saves it as **PNG, JPG, or PDF** — auto-download any combination of the three, or pick manually in the preview tab, with an optional custom save folder. Built as a replacement for GoFullPage after it was removed from the Chrome Web Store.

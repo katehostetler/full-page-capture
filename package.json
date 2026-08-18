@@ -1,10 +1,18 @@
 {
   "name": "full-page-capture",
-  "version": "0.4.0",
+  "version": "0.5.0",
+  "description": "Chrome extension for full-page screenshots — scrolls, stitches, and saves as PNG, JPG, or PDF. 100% local.",
+  "license": "MIT",
+  "author": "Kate Hostetler-Phillippi",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/katehostetler/full-page-capture.git"
+  },
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "vitest run"
+    "test": "vitest run",
+    "test:e2e": "node e2e/run-e2e.mjs"
   },
   "devDependencies": {
     "gifenc": "^1.0.3",
