@@ -4,6 +4,8 @@
 
 Captures **full-page screenshots**: it scrolls the page for you, stitches every screen into one image, and saves it as **PNG, JPG, or PDF** — auto-download any combination of the three, or pick manually in the preview tab, with an optional custom save folder. Built as a replacement for GoFullPage after it was removed from the Chrome Web Store.
 
+![Demo: the extension capturing a full page, then the preview tab with Download PNG / JPG / PDF buttons](docs/demo.gif)
+
 **100% local. Your screenshots never leave your machine.** There are no servers, no accounts, no analytics, and no network calls — the capture is assembled entirely inside your browser and saved straight to your Downloads folder. The extension uses the minimal `activeTab` permission, which means it can only ever see a page at the moment you click the capture button.
 
 ## Install (60 seconds)
