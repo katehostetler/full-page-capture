@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased — 2026-10-26
+
+- Dev only: Vitest 3 → 5. This clears two critical tinypool advisories (GHSA-5gmw-xhrv-c9v3, GHSA-85c8-ppgw-ccpr) in the test runner, and `npm audit` now reports 0 vulnerabilities. The extension code itself is unchanged.
+
 ## v0.6.0 — 2026-08-18
 
 - Preview tab now opens zoomed out so the whole capture is visible at once. Click the image (magnifying-glass cursor) to zoom in centered on that spot, click again — or use the new header magnifier button — to zoom back out.
